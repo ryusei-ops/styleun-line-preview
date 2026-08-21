@@ -7,8 +7,8 @@
 <title>フェスタ後アンケート Google口コミ動線</title>
 <style>
 :root{
-  --bg:#faf9f7; --panel:#ffffff; --ink:#2b2926; --ink-2:#6b645c; --ink-3:#9a938a;
-  --line:#e6e1d9; --accent:#8c7355; --accent-soft:#f0eae1;
+  --bg:#faf9f7; --ink:#2b2926; --ink-2:#6b645c; --ink-3:#9a938a;
+  --accent:#8c7355; --accent-soft:#f0eae1;
   --green:#06c755; --talk:#7494c0;
   color-scheme: light;
 }
@@ -17,47 +17,31 @@ body{
   background:var(--bg); color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
   line-height:1.75; -webkit-font-smoothing:antialiased; font-size:15px;
+  display:flex; flex-direction:column; align-items:center;
+  padding:44px 20px 56px; min-height:100vh;
 }
-header.page{padding:52px 24px 36px;text-align:center;border-bottom:1px solid var(--line);background:var(--panel)}
-header.page .eyebrow{font-size:11px;letter-spacing:.22em;color:var(--accent);margin-bottom:14px}
-header.page h1{font-size:26px;font-weight:600;letter-spacing:.02em;line-height:1.5;text-wrap:balance}
-header.page .sub{margin-top:12px;color:var(--ink-2);font-size:14px}
-header.page .meta{margin-top:18px;font-size:12px;color:var(--ink-2)}
+.head{text-align:center;margin-bottom:26px;max-width:560px}
+.head .eyebrow{font-size:11px;letter-spacing:.22em;color:var(--accent);margin-bottom:12px}
+.head h1{font-size:21px;font-weight:600;letter-spacing:.02em;line-height:1.6;text-wrap:balance}
+.head p{margin-top:12px;color:var(--ink-2);font-size:13.5px}
 
-main{max-width:1080px;margin:0 auto;padding:0 24px 90px}
-section{padding:52px 0;border-bottom:1px solid var(--line)}
-section:last-child{border-bottom:none}
-.sec-head{margin-bottom:30px}
-.sec-num{display:inline-block;font-size:11px;letter-spacing:.2em;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:14px}
-.sec-head h2{font-size:22px;font-weight:600;letter-spacing:.02em}
-.sec-head p{margin-top:10px;color:var(--ink-2);font-size:14px;max-width:720px}
-.lead{background:var(--accent-soft);border-left:3px solid var(--accent);padding:16px 20px;border-radius:0 8px 8px 0;margin:24px 0 0;font-size:14px;color:#5c4a35}
-.notice{padding:16px 20px;background:#fff8f5;border:1px solid #f0d9cf;border-radius:10px;font-size:13px;color:#8a4b32;line-height:1.8}
-.notice b{color:#7a3a22}
-
-/* ---------- controls ---------- */
-.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
-.seg-btn{padding:10px 22px;border:1.5px solid var(--accent);border-radius:24px;background:#fff;color:var(--accent);font-size:13.5px;font-weight:600;cursor:pointer;transition:all .18s;font-family:inherit}
-.seg-btn:hover{background:var(--accent-soft)}
-.seg-btn.active{background:var(--accent);color:#fff}
-.seg-btn:focus-visible,.reset-btn:focus-visible,.qr-btn:focus-visible,.cta-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.reset-btn{padding:10px 22px;border:1.5px solid #c9c2b7;border-radius:24px;background:#fff;color:var(--ink-2);font-size:13.5px;font-weight:600;cursor:pointer;transition:all .18s;font-family:inherit}
-.reset-btn:hover{background:#f2efe9}
-.seg-label{text-align:center;margin-bottom:16px;font-size:13px;color:var(--ink-2)}
-.seg-label strong{color:var(--accent);font-weight:600}
-
-/* ---------- stage ---------- */
-.stage{display:flex;gap:32px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+.reset-btn{
+  padding:9px 22px;border:1.5px solid var(--accent);border-radius:24px;
+  background:#fff;color:var(--accent);font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .18s;font-family:inherit;margin-bottom:22px;
+}
+.reset-btn:hover{background:var(--accent-soft)}
+.reset-btn:focus-visible,.qr-btn:focus-visible,.cta-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* ---------- phone ---------- */
-.phone{width:375px;max-width:100%;background:#fff;border-radius:38px;overflow:hidden;box-shadow:0 20px 60px rgba(43,41,38,.16),0 0 0 1px rgba(0,0,0,.05);flex:0 0 auto}
+.phone{width:375px;max-width:100%;background:#fff;border-radius:38px;overflow:hidden;box-shadow:0 20px 60px rgba(43,41,38,.16),0 0 0 1px rgba(0,0,0,.05)}
 .status-bar{height:46px;background:var(--green);display:flex;align-items:flex-end;justify-content:center;padding-bottom:7px}
 .status-bar span{color:#fff;font-size:11px;font-weight:600}
 .line-header{background:var(--green);padding:10px 16px 14px;display:flex;align-items:center;gap:12px}
 .line-header .back{color:#fff;font-size:22px;line-height:1}
-.avatar-header{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0}
+.avatar-header{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0;line-height:1.15;text-align:center}
 .line-header .name{color:#fff;font-size:15px;font-weight:600}
-.chat{background:var(--talk);height:560px;overflow-y:auto;padding:16px 12px;scroll-behavior:smooth}
+.chat{background:var(--talk);height:580px;overflow-y:auto;padding:16px 12px;scroll-behavior:smooth}
 
 .date-label{text-align:center;margin-bottom:16px}
 .date-label span{background:rgba(0,0,0,.25);color:#fff;font-size:11px;padding:3px 12px;border-radius:12px}
@@ -80,227 +64,55 @@ section:last-child{border-bottom:none}
 .qr-btn:hover{background:var(--green);color:#fff}
 .qr-btn:active{transform:scale(.96)}
 .qr-btn.disabled{pointer-events:none;opacity:.4}
+
 .cta-wrap{margin:8px 0 10px 44px;animation:fadeIn .35s ease}
-.cta-btn{display:block;background:var(--green);color:#fff;border:none;border-radius:20px;padding:12px 22px;font-size:13.5px;font-weight:600;text-align:center;max-width:252px;cursor:pointer;font-family:inherit}
-.cta-note{margin:-4px 0 10px 44px;font-size:10.5px;color:#fff;opacity:.9}
+.cta-btn{display:block;background:var(--green);color:#fff;border:none;border-radius:20px;padding:12px 22px;font-size:13.5px;font-weight:600;text-align:center;text-decoration:none;max-width:252px;cursor:pointer;font-family:inherit}
+.cta-btn:hover{background:#05b34c}
+
 .typing{display:flex;align-items:flex-end;gap:8px;margin-bottom:8px}
 .typing-dots{background:#fff;border-radius:18px;border-bottom-left-radius:4px;padding:12px 18px;display:flex;gap:4px}
 .typing-dots span{width:8px;height:8px;background:#aaa;border-radius:50%;animation:bounce .6s infinite alternate}
 .typing-dots span:nth-child(2){animation-delay:.15s}
 .typing-dots span:nth-child(3){animation-delay:.3s}
 @keyframes bounce{to{transform:translateY(-4px);opacity:.5}}
+
 .bottom-bar{background:#f7f7f7;border-top:1px solid #ddd;padding:10px 16px;display:flex;align-items:center;gap:10px}
 .input-fake{flex:1;background:#fff;border:1px solid #ddd;border-radius:20px;padding:8px 16px;font-size:13px;color:#999}
 
-/* ---------- side panel ---------- */
-.side{width:320px;max-width:100%;display:flex;flex-direction:column;gap:16px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
-.card h3{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--accent);letter-spacing:.04em}
-.card ul{list-style:none;font-size:12.5px;color:var(--ink-2);line-height:1.8}
-.card li{padding-left:14px;position:relative;margin-bottom:6px}
-.card li:last-child{margin-bottom:0}
-.card li::before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.5}
-.card p{font-size:12.5px;color:var(--ink-2);line-height:1.8}
-.steplist{counter-reset:st;list-style:none}
-.steplist li{padding-left:28px;position:relative;margin-bottom:9px;counter-increment:st;font-size:12.5px;color:var(--ink-2);line-height:1.7}
-.steplist li::before{content:counter(st);position:absolute;left:0;top:3px;width:19px;height:19px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.steplist li b{color:var(--ink);font-weight:600}
-.steplist li.on{color:var(--ink)}
-.steplist li.on::before{background:var(--accent);color:#fff}
-
-/* ---------- before/after ---------- */
-.before-after{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.ba{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
-.ba h4{font-size:13px;margin-bottom:14px;color:var(--ink-2);letter-spacing:.04em}
-.ba.after{border-color:var(--accent);box-shadow:0 2px 14px rgba(140,115,85,.1)}
-.ba.after h4{color:var(--accent)}
-.ba ol{list-style:none;font-size:13.5px;counter-reset:s}
-.ba li{padding:9px 0 9px 30px;border-bottom:1px dashed var(--line);position:relative;counter-increment:s}
-.ba li:last-child{border:none}
-.ba li::before{content:counter(s);position:absolute;left:0;top:11px;width:20px;height:20px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700}
-.ba li .note{display:block;color:var(--ink-3);font-size:12px;line-height:1.6}
-.ba li.branch::before{background:#e8e1d5}
-
-/* ---------- reasons ---------- */
-.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.reason{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 18px}
-.reason .tag{display:inline-block;font-size:10.5px;letter-spacing:.06em;background:var(--accent-soft);color:var(--accent);padding:3px 9px;border-radius:4px;margin-bottom:11px}
-.reason h3{font-size:14px;font-weight:600;margin-bottom:8px;line-height:1.6}
-.reason p{font-size:12.5px;color:var(--ink-2);line-height:1.8}
-
-/* ---------- table ---------- */
-.tbl-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
-th{background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:.04em;white-space:nowrap}
-tr:last-child td{border-bottom:none}
-td:first-child{white-space:nowrap;font-weight:600;font-size:13px}
-td .sub{display:block;color:var(--ink-3);font-size:12px;font-weight:400}
-
-footer{padding:34px 24px 56px;text-align:center;font-size:12px;color:var(--ink-3)}
+footer{margin-top:26px;font-size:11.5px;color:var(--ink-3);text-align:center}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .chat{scroll-behavior:auto}
 }
-@media (max-width:860px){
-  .before-after,.reasons{grid-template-columns:1fr}
-  .stage{gap:24px}
-  .side{width:375px}
-}
-@media (max-width:760px){
-  header.page{padding:38px 20px 30px}
-  header.page h1{font-size:21px}
-  section{padding:42px 0}
-}
 </style>
 </head>
 <body>
 
-<header class="page">
+<div class="head">
   <div class="eyebrow">STYLEUN WEDDINGS</div>
-  <h1>フェスタ後アンケート → Google口コミ 動線のご提案</h1>
-  <p class="sub">アンケートでいただいたご感想を、そのままGoogleの口コミへ載せていただく流れをつくります。</p>
-  <p class="meta">2026年8月21日 ／ Leit On 大石</p>
-</header>
+  <h1>フェスタ後アンケート → Google口コミ 動線</h1>
+  <p>緑のボタンをタップすると、次のメッセージが届きます。「口コミを投稿する」と「今回は見送る」の両方をお試しください。</p>
+</div>
 
-<main>
+<button class="reset-btn" onclick="resetChat()">最初から再生する</button>
 
-<section>
-  <div class="sec-head">
-    <span class="sec-num">01</span>
-    <h2>実際の画面を触って確認できます</h2>
-    <p>実機と同じようにボタンをタップすると、次のメッセージが届きます。「口コミを投稿する」と「今回は見送る」の両方をお試しください。</p>
+<div class="phone">
+  <div class="status-bar"><span>18:42</span></div>
+  <div class="line-header">
+    <span class="back">&lsaquo;</span>
+    <div class="avatar-header">STYLE<br>UN</div>
+    <span class="name">STYLEUN WEDDINGS</span>
   </div>
-
-  <div class="controls">
-    <button class="seg-btn active" data-seg="main" onclick="switchScene('main')">アンケート回答後の本編</button>
-    <button class="seg-btn" data-seg="remind" onclick="switchScene('remind')">48時間後のリマインド</button>
-    <button class="reset-btn" onclick="resetChat()">最初から</button>
-  </div>
-  <div class="seg-label">現在表示：<strong id="seg-display">アンケート回答後の本編</strong></div>
-
-  <div class="stage">
-    <div class="phone">
-      <div class="status-bar"><span>18:42</span></div>
-      <div class="line-header">
-        <span class="back">&lsaquo;</span>
-        <div class="avatar-header">STYLE<br>UN</div>
-        <span class="name">STYLEUN WEDDINGS</span>
-      </div>
-      <div class="chat" id="chat"></div>
-      <div class="bottom-bar"><div class="input-fake">Aa</div></div>
-    </div>
-
-    <div class="side">
-      <div class="card">
-        <h3>いまどこを見ているか</h3>
-        <ol class="steplist" id="steps">
-          <li data-step="1"><b>チケットを配布</b>／回答者全員に条件なしでお送りします</li>
-          <li data-step="2"><b>口コミのお願い</b>／投稿するか見送るかを選んでいただきます</li>
-          <li data-step="3"><b>ご感想と投稿URLを送付</b>／コピーして貼り付けるだけです</li>
-          <li data-step="4"><b>投稿の報告を受けてお礼</b>／ここで終了です</li>
-        </ol>
-      </div>
-      <div class="card">
-        <h3>操作方法</h3>
-        <ul>
-          <li>緑のボタンをタップすると次のメッセージが届きます</li>
-          <li>上部の切替で48時間後のリマインドも確認できます</li>
-          <li>「最初から」で何度でも再生できます</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>この画面での仮置き</h3>
-        <ul>
-          <li>チケットの記載内容（利用店舗・有効期限・利用方法）</li>
-          <li>口コミの投稿先URL（どの会場に集めるか）</li>
-          <li>ご感想の本文は、アンケートの回答がそのまま入ります</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="sec-head">
-    <span class="sec-num">02</span>
-    <h2>変更の要点</h2>
-    <p>アンケート回答後にレストランチケットをお送りする現在の流れに、口コミ投稿のお願いを1ステップ追加します。チケットは今までどおり、回答いただいた全員にお送りします。</p>
-  </div>
-  <div class="before-after">
-    <div class="ba">
-      <h4>現在</h4>
-      <ol>
-        <li>アンケートに回答<span class="note">フェスタ参加後</span></li>
-        <li>レストランチケットを配布<span class="note">ここで完了</span></li>
-      </ol>
-    </div>
-    <div class="ba after">
-      <h4>変更後</h4>
-      <ol>
-        <li>アンケートに回答</li>
-        <li>レストランチケットを配布<span class="note">回答者全員・条件なし</span></li>
-        <li class="branch">口コミ投稿のお願い<span class="note">「投稿する」／「見送る」の2択</span></li>
-        <li class="branch">投稿する方には、ご感想の本文と投稿URLを送付<span class="note">コピーして貼り付けるだけ</span></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="sec-head">
-    <span class="sec-num">03</span>
-    <h2>チケットは「口コミの条件」にしません</h2>
-    <p>当初は「投稿を確認できた方にチケットをお渡しする」案も検討しましたが、下記の理由からチケットはアンケート回答のお礼として先にお渡しし、口コミは純粋なお願いとして切り分ける形にしています。</p>
-  </div>
-  <div class="reasons">
-    <div class="reason">
-      <span class="tag">Googleのポリシー</span>
-      <h3>特典と引き換えの口コミ依頼は禁止されています</h3>
-      <p>投稿された口コミが削除される、ビジネスプロフィール自体がペナルティを受ける、といったリスクがあります。これまで積み上げた口コミにも影響します。</p>
-    </div>
-    <div class="reason">
-      <span class="tag">景品表示法</span>
-      <h3>ステルスマーケティング規制の対象になり得ます</h3>
-      <p>特典を条件にした口コミは「事業者の表示」と判断される場合があり、本来はPR表記が必要になります。</p>
-    </div>
-    <div class="reason">
-      <span class="tag">運用面</span>
-      <h3>投稿の確認は結局できません</h3>
-      <p>Google側で「誰が投稿したか」を特定する手段がないため、条件をつけても自己申告になります。確認作業の手間だけが増えます。</p>
-    </div>
-  </div>
-  <div class="lead">先にチケットをお渡ししても、お願いするタイミングはアンケート回答の直後です。フェスタの記憶が新しく、ご感想を書き終えた直後という点は変わらないため、ご協力いただける確率は十分に見込めます。</div>
-</section>
-
-<section>
-  <div class="sec-head">
-    <span class="sec-num">04</span>
-    <h2>ご確認いただきたい点</h2>
-    <p>下記が決まり次第、エルメへの設定に進みます。</p>
-  </div>
-  <div class="tbl-wrap">
-  <table>
-    <tr><th>項目</th><th>内容</th></tr>
-    <tr><td>チケットの記載内容</td><td>利用店舗・有効期限・利用方法の文言をご指定ください。<span class="sub">現在の配布メッセージのままで良ければ、そちらを流用します。</span></td></tr>
-    <tr><td>口コミの投稿先</td><td>どの会場のGoogleビジネスプロフィールに集めるかをご指定ください。<span class="sub">フェスタが合同開催の場合は、接客担当の会場ごとに投稿先を出し分けることもできます。</span></td></tr>
-    <tr><td>キャトルセゾン浜松</td><td>レストランとウェディングでプロフィールが同一のため、フェスタ由来の口コミが飲食側の評価にも並びます。<span class="sub">問題ないかご確認ください。</span></td></tr>
-    <tr><td>ご感想の差し込み</td><td>アンケートの回答本文をメッセージへ自動で差し込めるか、エルメ側の仕様を確認します。<span class="sub">できない場合は「回答画面からコピーしてください」という案内に変更します。</span></td></tr>
-    <tr><td>星の数の指定</td><td>「★5でお願いします」といった依頼は入れていません。<span class="sub">ポリシー違反となり、口コミの削除対象になるためです。</span></td></tr>
-  </table>
-  </div>
-  <div class="notice" style="margin-top:24px">
-    <b>満足度による出し分けについて</b><br>
-    高い評価をつけた方にだけ口コミを依頼する方法もありますが、Googleではレビューゲーティングとして禁止されています。回答いただいた方全員に、同じ案内をお送りする設計にしています。
-  </div>
-</section>
-
-</main>
+  <div class="chat" id="chat"></div>
+  <div class="bottom-bar"><div class="input-fake">Aa</div></div>
+</div>
 
 <footer>株式会社スティルアン 御中／Leit On 大石</footer>
 
 <script>
+const REVIEW_URL = 'https://g.page/r/CZq9Vv1ky7-UEAE/review';
+
 const TICKET = '【チケット内容 ※要確認】\n・利用店舗：\n・有効期限：\n・ご利用方法：ご予約時に「LINEチケット利用」とお伝えください';
 
 const M1 = 'アンケート、確かに受け取りました。\n当日いただいたご感想は、これからの会場づくりに使わせていただきます。\n\nお礼のレストランチケットをお送りします。\n\n' + TICKET;
@@ -317,21 +129,12 @@ const M4 = 'ご協力ありがとうございました！\nいただいた言葉
 
 const M5 = 'この度はアンケートのご回答、ありがとうございました！\nいただいたご意見は、これからの会場づくりに活かしてまいります。\n\nチケットは1つ前のメッセージからご利用ください。\nまたお会いできる日を、スタッフ一同楽しみにしております。';
 
-const M6 = '先日の口コミ投稿、まだの場合はこちらから進められます。\nご感想の文章は下のメッセージに載せています。';
-
-let scene = 'main';
 let runId = 0;
 
 const chat = () => document.getElementById('chat');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
 const scroll = () => { const c = chat(); c.scrollTop = c.scrollHeight; };
-
-function markStep(n){
-  document.querySelectorAll('#steps li').forEach(li => {
-    li.classList.toggle('on', Number(li.dataset.step) <= n);
-  });
-}
 
 function dateLabel(text){
   const d = document.createElement('div');
@@ -366,21 +169,17 @@ function addHint(text){
   scroll();
 }
 
-function addCta(label, note){
+function addCta(label, url){
   const wrap = document.createElement('div');
   wrap.className = 'cta-wrap';
-  const b = document.createElement('button');
-  b.className = 'cta-btn';
-  b.type = 'button';
-  b.textContent = label + ' ▶';
-  wrap.appendChild(b);
+  const a = document.createElement('a');
+  a.className = 'cta-btn';
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  a.textContent = label + ' ▶';
+  wrap.appendChild(a);
   chat().appendChild(wrap);
-  if (note) {
-    const n = document.createElement('div');
-    n.className = 'cta-note';
-    n.textContent = note;
-    chat().appendChild(n);
-  }
   scroll();
 }
 
@@ -416,16 +215,13 @@ async function typing(my){
 async function startMain(){
   const my = ++runId;
   chat().innerHTML = '';
-  markStep(0);
   dateLabel('アンケート回答の直後');
   await sleep(400); if (my !== runId) return;
 
   addBot(M1, '18:42');
-  markStep(1);
   await sleep(1100); if (my !== runId) return;
 
   addBot(M2, '18:42');
-  markStep(2);
   await sleep(350); if (my !== runId) return;
 
   addQuick([
@@ -441,7 +237,6 @@ async function choosePost(my){
   if (!await typing(my)) return;
 
   addBot(M3A, '18:43');
-  markStep(3);
   await sleep(900); if (my !== runId) return;
 
   addBot(M3B, '18:43', true);
@@ -450,7 +245,7 @@ async function choosePost(my){
 
   addBot(M3C, '18:43');
   await sleep(300); if (my !== runId) return;
-  addCta('投稿ページを開く', '※ 投稿先URLは会場が決まり次第、設定します');
+  addCta('投稿ページを開く', REVIEW_URL);
   await sleep(300); if (my !== runId) return;
 
   addQuick([
@@ -464,7 +259,6 @@ async function reportDone(my){
   await sleep(500); if (my !== runId) return;
   if (!await typing(my)) return;
   addBot(M4, '18:46');
-  markStep(4);
 }
 
 async function chooseSkip(my){
@@ -473,51 +267,12 @@ async function chooseSkip(my){
   await sleep(500); if (my !== runId) return;
   if (!await typing(my)) return;
   addBot(M5, '18:43');
-  markStep(2);
   await sleep(300); if (my !== runId) return;
   addHint('ここで終了します。理由をうかがったり、後日あらためてお願いしたりはしません。');
 }
 
-async function startRemind(){
-  const my = ++runId;
-  chat().innerHTML = '';
-  markStep(3);
-  dateLabel('2日後');
-  await sleep(400); if (my !== runId) return;
-
-  addBot(M6, '11:00');
-  await sleep(900); if (my !== runId) return;
-  addBot(M3B, '11:00', true);
-  await sleep(700); if (my !== runId) return;
-  addCta('投稿ページを開く', '※ 投稿先URLは会場が決まり次第、設定します');
-  await sleep(300); if (my !== runId) return;
-
-  addQuick([
-    { label: '投稿しました', action: () => remindDone(my) }
-  ]);
-  await sleep(300); if (my !== runId) return;
-  addHint('「口コミを投稿する」を押したまま報告がない方にだけ、48時間後に1回送ります。これ以上は追いません。');
-}
-
-async function remindDone(my){
-  if (my !== runId) return;
-  addUser('投稿しました', '11:02');
-  await sleep(500); if (my !== runId) return;
-  if (!await typing(my)) return;
-  addBot(M4, '11:02');
-  markStep(4);
-}
-
-function switchScene(s){
-  scene = s;
-  document.querySelectorAll('.seg-btn').forEach(b => b.classList.toggle('active', b.dataset.seg === s));
-  document.getElementById('seg-display').textContent =
-    s === 'main' ? 'アンケート回答後の本編' : '48時間後のリマインド';
-  resetChat();
-}
-
 function resetChat(){
-  if (scene === 'main') startMain(); else startRemind();
+  startMain();
 }
 
 startMain();
