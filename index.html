@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>フェスタ後アンケート Google口コミ動線</title>
+<style>
+:root{
+  --bg:#faf9f7; --panel:#ffffff; --ink:#2b2926; --ink-2:#6b645c; --ink-3:#9a938a;
+  --line:#e6e1d9; --accent:#8c7355; --accent-soft:#f0eae1;
+  --talk-bg:#8fa8c4; --tent:#c0392b;
+  color-scheme: light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  line-height:1.75; -webkit-font-smoothing:antialiased; font-size:15px;
+}
+header{padding:56px 24px 40px;text-align:center;border-bottom:1px solid var(--line);background:var(--panel)}
+header .eyebrow{font-size:11px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin-bottom:14px}
+header h1{font-size:26px;font-weight:600;letter-spacing:.02em;line-height:1.5;text-wrap:balance}
+header .sub{margin-top:12px;color:var(--ink-2);font-size:14px}
+header .meta{margin-top:20px;font-size:12px;color:var(--ink-2)}
+
+main{max-width:1080px;margin:0 auto;padding:0 24px 100px}
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+section:last-child{border-bottom:none}
+.sec-head{margin-bottom:32px}
+.sec-num{display:inline-block;font-size:11px;letter-spacing:.2em;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:3px 12px;margin-bottom:14px}
+.sec-head h2{font-size:22px;font-weight:600;letter-spacing:.02em}
+.sec-head p{margin-top:10px;color:var(--ink-2);font-size:14px;max-width:720px}
+
+.lead{background:var(--accent-soft);border-left:3px solid var(--accent);padding:16px 20px;border-radius:0 8px 8px 0;margin:24px 0;font-size:14px;color:#5c4a35}
+.notice{padding:16px 20px;background:#fff8f5;border:1px solid #f0d9cf;border-radius:10px;font-size:13px;color:#8a4b32;line-height:1.8}
+.notice b{color:#7a3a22}
+
+/* before / after */
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ba{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+.ba h4{font-size:13px;margin-bottom:14px;color:var(--ink-2);letter-spacing:.04em}
+.ba.after{border-color:var(--accent);box-shadow:0 2px 14px rgba(140,115,85,.1)}
+.ba.after h4{color:var(--accent)}
+.ba ol{list-style:none;font-size:13.5px;counter-reset:s}
+.ba li{padding:9px 0 9px 30px;border-bottom:1px dashed var(--line);position:relative;counter-increment:s}
+.ba li:last-child{border:none}
+.ba li::before{content:counter(s);position:absolute;left:0;top:11px;width:20px;height:20px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.ba li .note{display:block;color:var(--ink-3);font-size:12px;line-height:1.6}
+.ba li.branch::before{background:#e8e1d5}
+
+/* reasons */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.reason{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 18px}
+.reason .tag{display:inline-block;font-size:10.5px;letter-spacing:.06em;background:var(--accent-soft);color:var(--accent);padding:3px 9px;border-radius:4px;margin-bottom:11px}
+.reason h3{font-size:14px;font-weight:600;margin-bottom:8px;line-height:1.6}
+.reason p{font-size:12.5px;color:var(--ink-2);line-height:1.8}
+
+/* phone */
+.screens{display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+.screen{width:340px;max-width:100%}
+.screen-label{text-align:center;font-size:12px;color:var(--ink-2);margin-bottom:10px}
+.screen-label b{color:var(--ink);font-weight:600;display:block;font-size:13px;margin-bottom:2px}
+.phone{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--talk-bg);box-shadow:0 4px 24px rgba(43,41,38,.08)}
+.phone-bar{background:#f7f7f7;border-bottom:1px solid #e3e3e3;padding:9px 14px;font-size:13px;font-weight:600;text-align:center;color:#333}
+.talk{padding:16px 12px;min-height:120px}
+.msg{display:flex;gap:8px;margin-bottom:14px;align-items:flex-start}
+.ava{width:34px;height:34px;border-radius:50%;flex:0 0 34px;background:linear-gradient(140deg,#b6a184,#8c7355);color:#fff;font-size:8px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2}
+.bubble{background:#fff;border-radius:4px 16px 16px 16px;padding:12px 14px;font-size:13px;line-height:1.85;max-width:250px;box-shadow:0 1px 2px rgba(0,0,0,.06);white-space:pre-line}
+.msg.me{justify-content:flex-end}
+.msg.me .bubble{background:#8de055;border-radius:16px 4px 16px 16px}
+.bubble-wrap{max-width:250px}
+.bubble-wrap.card{background:#fff;border-radius:4px 16px 16px 16px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bubble-wrap.card .bubble{box-shadow:none;border-radius:0;max-width:100%}
+.btns{border-top:1px solid #ececec}
+.btn-line{display:block;text-align:center;padding:10px 4px;font-size:12.5px;color:#1976d2;border-bottom:1px solid #ececec}
+.btn-line:last-child{border-bottom:none}
+.bubble.copy{border:1px dashed var(--accent);background:#fbf8f3}
+.msg-note{font-size:11px;color:#fff;opacity:.9;text-align:left;margin:-8px 0 14px 42px;line-height:1.6}
+.msg-tag{display:inline-block;font-size:10px;letter-spacing:.04em;background:rgba(255,255,255,.85);color:var(--accent);padding:2px 8px;border-radius:4px;margin:-6px 0 12px 42px}
+
+.aside{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.aside h4{font-size:13px;font-weight:600;margin-bottom:8px}
+.aside p{font-size:12.5px;color:var(--ink-2);line-height:1.8}
+
+/* table */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:.04em;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td:first-child{white-space:nowrap;font-weight:600;font-size:13px}
+td .sub{display:block;color:var(--ink-3);font-size:12px;font-weight:400}
+
+footer{padding:36px 24px 60px;text-align:center;font-size:12px;color:var(--ink-3)}
+
+@media (max-width:760px){
+  .before-after,.reasons{grid-template-columns:1fr}
+  header{padding:40px 20px 32px}
+  header h1{font-size:21px}
+  section{padding:44px 0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">STYLEUN WEDDINGS</div>
+  <h1>フェスタ後アンケート → Google口コミ 動線のご提案</h1>
+  <p class="sub">アンケートでいただいたご感想を、そのままGoogleの口コミへ載せていただく流れをつくります。</p>
+  <p class="meta">2026年8月21日 ／ Leit On 大石</p>
+</header>
+
+<main>
+
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2>変更の要点</h2>
+    <p>アンケート回答後にレストランチケットをお送りする現在の流れに、口コミ投稿のお願いを1ステップ追加します。チケットは今までどおり、回答いただいた全員にお送りします。</p>
+  </div>
+
+  <div class="before-after">
+    <div class="ba">
+      <h4>現在</h4>
+      <ol>
+        <li>アンケートに回答<span class="note">フェスタ参加後</span></li>
+        <li>レストランチケットを配布<span class="note">ここで完了</span></li>
+      </ol>
+    </div>
+    <div class="ba after">
+      <h4>変更後</h4>
+      <ol>
+        <li>アンケートに回答</li>
+        <li>レストランチケットを配布<span class="note">回答者全員・条件なし</span></li>
+        <li class="branch">口コミ投稿のお願い<span class="note">「投稿する」／「見送る」の2択</span></li>
+        <li class="branch">投稿する方には、ご感想の本文と投稿URLを送付<span class="note">コピーして貼り付けるだけ</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2>チケットは「口コミの条件」にしません</h2>
+    <p>当初は「投稿を確認できた方にチケットをお渡しする」案も検討しましたが、下記の理由からチケットはアンケート回答のお礼として先にお渡しし、口コミは純粋なお願いとして切り分ける形にしています。</p>
+  </div>
+
+  <div class="reasons">
+    <div class="reason">
+      <span class="tag">Googleのポリシー</span>
+      <h3>特典と引き換えの口コミ依頼は禁止されています</h3>
+      <p>投稿された口コミが削除される、ビジネスプロフィール自体がペナルティを受ける、といったリスクがあります。これまで積み上げた口コミにも影響します。</p>
+    </div>
+    <div class="reason">
+      <span class="tag">景品表示法</span>
+      <h3>ステルスマーケティング規制の対象になり得ます</h3>
+      <p>特典を条件にした口コミは「事業者の表示」と判断される場合があり、本来はPR表記が必要になります。</p>
+    </div>
+    <div class="reason">
+      <span class="tag">運用面</span>
+      <h3>投稿の確認は結局できません</h3>
+      <p>Google側で「誰が投稿したか」を特定する手段がないため、条件をつけても自己申告になります。確認作業の手間だけが増えます。</p>
+    </div>
+  </div>
+
+  <div class="lead">先にチケットをお渡ししても、お願いするタイミングはアンケート回答の直後です。フェスタの記憶が新しく、ご感想を書き終えた直後という点は変わらないため、ご協力いただける確率は十分に見込めます。</div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2>実際の画面と文面</h2>
+    <p>LINEでのやりとりのイメージです。文面はこのまま設定します。</p>
+  </div>
+
+  <div class="screens">
+
+    <div class="screen">
+      <div class="screen-label"><b>① アンケート回答の直後</b>チケットをお渡ししてから、お願いする</div>
+      <div class="phone">
+        <div class="phone-bar">STYLEUN WEDDINGS</div>
+        <div class="talk">
+          <div class="msg">
+            <div class="ava">STYLE<br>UN</div>
+            <div class="bubble">アンケート、確かに受け取りました。
+当日いただいたご感想は、これからの会場づくりに使わせていただきます。
+
+お礼のレストランチケットをお送りします。
+
+【チケット内容 ※要確認】
+・利用店舗：
+・有効期限：
+・ご利用方法：ご予約時に「LINEチケット利用」とお伝えください</div>
+          </div>
+          <div class="msg">
+            <div class="ava">STYLE<br>UN</div>
+            <div class="bubble-wrap card">
+              <div class="bubble">もうひとつだけ、お願いがあります。
+
+いまアンケートにご記入いただいたご感想を、そのままGoogleの口コミにも載せていただけませんか。
+
+式場探しをしている方が最も参考にするのが、実際に足を運んだ方の言葉です。
+文章はご記入いただいたものをコピーして貼り付けるだけで、1分ほどで終わります。</div>
+              <div class="btns">
+                <span class="btn-line">口コミを投稿する</span>
+                <span class="btn-line">今回は見送る</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen">
+      <div class="screen-label"><b>②「口コミを投稿する」を選んだ場合</b>本文と投稿URLをお送りする</div>
+      <div class="phone">
+        <div class="phone-bar">STYLEUN WEDDINGS</div>
+        <div class="talk">
+          <div class="msg">
+            <div class="ava">STYLE<br>UN</div>
+            <div class="bubble">次のメッセージに、ご記入いただいたご感想をそのまま載せています。
+長押しでコピーして、投稿ページに貼り付けてください。
+
+1. 次のメッセージを長押しして「コピー」を選ぶ
+2. その下のボタンから投稿ページを開く
+3. 星の数を選び、コピーした文章を貼り付けて投稿する
+
+※投稿にはGoogleアカウントへのログインが必要です
+※文章は書き換えていただいても構いません</div>
+          </div>
+          <div class="msg">
+            <div class="ava">STYLE<br>UN</div>
+            <div class="bubble copy">スタッフの方が丁寧に案内してくださって、初めての式場見学でも不安なく回れました。チャペルの雰囲気が想像以上で……
+
+（アンケートのご感想がそのまま入ります）</div>
+          </div>
+          <div class="msg-tag">前後に文字を入れず単独で送る</div>
+          <div class="msg">
+            <div class="ava">STYLE<br>UN</div>
+            <div class="bubble-wrap card">
+              <div class="bubble">下のボタンから投稿ページを開いて、貼り付けてください。</div>
+              <div class="btns">
+                <span class="btn-line">投稿ページを開く</span>
+                <span class="btn-line">投稿しました</span>
+              </div>
+            </div>
+          </div>
+          <div class="msg me"><div class="bubble">投稿しました</div></div>
+          <div class="msg">
+            <div class="ava">STYLE<br>UN</div>
+            <div class="bubble">ご協力ありがとうございました！
+いただいた言葉は、これから式場を探される方の判断材料になります。
+
+チケットは1つ前のメッセージからご利用ください。
+またお会いできる日を、スタッフ一同楽しみにしております。</div>
+          </div>
+        </div>
+      </div>
+      <div class="aside">
+        <h4>リマインドについて</h4>
+        <p>「口コミを投稿する」を押したまま投稿の報告がない方には、48時間後に1回だけご感想の本文と投稿URLを再送します。それ以上は追いません。</p>
+      </div>
+    </div>
+
+    <div class="screen">
+      <div class="screen-label"><b>③「今回は見送る」を選んだ場合</b>引き止めず、そのまま終える</div>
+      <div class="phone">
+        <div class="phone-bar">STYLEUN WEDDINGS</div>
+        <div class="talk">
+          <div class="msg me"><div class="bubble">今回は見送る</div></div>
+          <div class="msg">
+            <div class="ava">STYLE<br>UN</div>
+            <div class="bubble">この度はアンケートのご回答、ありがとうございました！
+いただいたご意見は、これからの会場づくりに活かしてまいります。
+
+チケットは1つ前のメッセージからご利用ください。
+またお会いできる日を、スタッフ一同楽しみにしております。</div>
+          </div>
+        </div>
+      </div>
+      <div class="aside">
+        <h4>断られた後は追いません</h4>
+        <p>理由をうかがったり、後日あらためてお願いしたりはしません。断った直後にもう一度負荷をかけると、その後の紹介キャンペーンやレストランのご利用まで遠のくためです。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <h2>ご確認いただきたい点</h2>
+    <p>下記が決まり次第、エルメへの設定に進みます。</p>
+  </div>
+
+  <div class="tbl-wrap">
+  <table>
+    <tr>
+      <th>項目</th>
+      <th>内容</th>
+    </tr>
+    <tr>
+      <td>チケットの記載内容</td>
+      <td>利用店舗・有効期限・利用方法の文言をご指定ください。<span class="sub">現在の配布メッセージのままで良ければ、そちらを流用します。</span></td>
+    </tr>
+    <tr>
+      <td>口コミの投稿先</td>
+      <td>どの会場のGoogleビジネスプロフィールに集めるかをご指定ください。<span class="sub">フェスタが合同開催の場合は、接客担当の会場ごとに投稿先を出し分けることもできます。</span></td>
+    </tr>
+    <tr>
+      <td>キャトルセゾン浜松</td>
+      <td>レストランとウェディングでプロフィールが同一のため、フェスタ由来の口コミが飲食側の評価にも並びます。<span class="sub">問題ないかご確認ください。</span></td>
+    </tr>
+    <tr>
+      <td>ご感想の差し込み</td>
+      <td>アンケートの回答本文をメッセージへ自動で差し込めるか、エルメ側の仕様を確認します。<span class="sub">できない場合は「回答画面からコピーしてください」という案内に変更します。</span></td>
+    </tr>
+    <tr>
+      <td>星の数の指定</td>
+      <td>「★5でお願いします」といった依頼は入れていません。<span class="sub">ポリシー違反となり、口コミの削除対象になるためです。</span></td>
+    </tr>
+  </table>
+  </div>
+
+  <div class="notice" style="margin-top:24px">
+    <b>満足度による出し分けについて</b><br>
+    高い評価をつけた方にだけ口コミを依頼する方法もありますが、Googleではレビューゲーティングとして禁止されています。回答いただいた方全員に、同じ案内をお送りする設計にしています。
+  </div>
+</section>
+
+</main>
+
+<footer>株式会社スティルアン 御中／Leit On 大石</footer>
+
+</body>
+</html>
