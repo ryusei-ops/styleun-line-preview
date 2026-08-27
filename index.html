@@ -39,7 +39,7 @@ body{
 .status-bar span{color:#fff;font-size:11px;font-weight:600}
 .line-header{background:var(--green);padding:10px 16px 14px;display:flex;align-items:center;gap:12px}
 .line-header .back{color:#fff;font-size:22px;line-height:1}
-.avatar-header{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0;line-height:1.15;text-align:center}
+.avatar-header{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700;color:var(--accent);flex-shrink:0;line-height:1.15;text-align:center}
 .line-header .name{color:#fff;font-size:15px;font-weight:600}
 .chat{background:var(--talk);height:580px;overflow-y:auto;padding:16px 12px;scroll-behavior:smooth}
 
@@ -50,7 +50,7 @@ body{
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .msg-row.bot{justify-content:flex-start}
 .msg-row.user{justify-content:flex-end}
-.avatar{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--accent);flex-shrink:0;align-self:flex-start;line-height:1.15;text-align:center}
+.avatar{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:var(--accent);flex-shrink:0;align-self:flex-start;line-height:1.15;text-align:center}
 .bubble{max-width:252px;padding:10px 14px;border-radius:18px;font-size:13.5px;line-height:1.75;white-space:pre-wrap;word-break:break-word}
 .bot .bubble{background:#fff;color:#111;border-bottom-left-radius:4px}
 .user .bubble{background:var(--green);color:#fff;border-bottom-right-radius:4px}
@@ -90,7 +90,7 @@ footer{margin-top:26px;font-size:11.5px;color:var(--ink-3);text-align:center}
 <body>
 
 <div class="head">
-  <div class="eyebrow">STYLEUN WEDDINGS</div>
+  <div class="eyebrow">浜松ウェディングフェスタ</div>
   <h1>フェスタ後アンケート → Google口コミ 動線</h1>
   <p>緑のボタンをタップすると、次のメッセージが届きます。「口コミを投稿する」と「今回は見送る」の両方をお試しください。</p>
 </div>
@@ -101,8 +101,8 @@ footer{margin-top:26px;font-size:11.5px;color:var(--ink-3);text-align:center}
   <div class="status-bar"><span>18:42</span></div>
   <div class="line-header">
     <span class="back">&lsaquo;</span>
-    <div class="avatar-header">STYLE<br>UN</div>
-    <span class="name">STYLEUN WEDDINGS</span>
+    <div class="avatar-header">浜松<br>フェスタ</div>
+    <span class="name">浜松ウェディングフェスタ</span>
   </div>
   <div class="chat" id="chat"></div>
   <div class="bottom-bar"><div class="input-fake">Aa</div></div>
@@ -113,25 +113,27 @@ footer{margin-top:26px;font-size:11.5px;color:var(--ink-3);text-align:center}
 <script>
 const REVIEW_URL = 'https://g.page/r/CZq9Vv1ky7-UEAE/review';
 
-const TICKET = '【チケット内容 ※要確認】\n・利用店舗：\n・有効期限：\n・ご利用方法：ご予約時に「LINEチケット利用」とお伝えください';
+const TICKET_BODY = '【キャトルセゾン浜松】のレストランでご利用いただけるお食事チケットです！\nぜひおふたりの特別なひとときとしてご利用ください🍴\n\n（ここにチケット本体を添付 ※要確認）';
 
-const M1 = 'アンケート、ありがとうございました！\n当日のご感想、ありがたく読ませていただきますね。';
+const CLOSING = '気になる結婚式場のご見学予約や結婚式に関するご相談も、このLINEからお気軽にお問い合わせください💍\n\nおふたりらしい結婚式との出会いを、スタッフ一同応援しております。\n今後とも浜松ウェディングフェスタをよろしくお願いいたします😊';
 
-const M2 = 'それと、もうひとつだけお願いさせてください。\n\nいま書いていただいたご感想、そのままGoogleの口コミにも載せていただけませんか？\n\n式場探しをしている方が一番参考にするのは、実際に来られた方の言葉なんです。\nコピーして貼り付けるだけなので、1分ほどで終わります。';
+const M1 = '{name}様\n\nアンケートへのご回答ありがとうございました✨\n当日のご感想、ありがたく読ませていただきますね。';
 
-const T_YES = 'ありがとうございます、助かります！\n先にお礼のレストランチケットをお送りしますね。\n\n' + TICKET;
+const M2 = 'それと、もうひとつだけお願いさせてください🙏\n\nいま書いていただいたご感想、そのままGoogleの口コミにも載せていただけませんか？\n\n式場探しをされている方が一番参考にされるのは、実際に足を運ばれた方の言葉なんです。\nコピーして貼り付けるだけなので、1分ほどで終わります😊';
 
-const T_NO = '承知しました！\nお礼のレストランチケットをお送りしますね。\n\n' + TICKET;
+const T_YES = 'ありがとうございます、とても助かります✨\n先に参加特典のレストランチケットをお送りしますね🎁\n\n' + TICKET_BODY;
 
-const M3A = 'それでは、口コミの手順です。\n次のメッセージに、書いていただいたご感想をそのまま載せておきますね。\n\n1. 次のメッセージを長押しして「コピー」を選ぶ\n2. 下のボタンから投稿ページを開く\n3. 星の数を選んで、貼り付けたら投稿\n\n※Googleアカウントへのログインが必要です\n※文章はそのままでも、書き換えていただいても大丈夫です';
+const T_NO = '承知しました！\nご回答いただいた皆さまへ、参加特典のレストランチケットをお送りいたします🎁\n\n' + TICKET_BODY;
+
+const M3A = 'それでは、口コミの手順です📝\n次のメッセージに、書いていただいたご感想をそのまま載せておきますね。\n\n1. 次のメッセージを長押しして「コピー」を選ぶ\n2. 下のボタンから投稿ページを開く\n3. 星の数を選んで、貼り付けたら投稿\n\n※Googleアカウントへのログインが必要です\n※文章はそのままでも、書き換えていただいても大丈夫です';
 
 const M3B = 'スタッフの方が丁寧に案内してくださって、初めての式場見学でも不安なく回れました。チャペルの雰囲気が想像以上で、ここで挙げたいと素直に思えました。\n\n（アンケートのご感想がそのまま入ります）';
 
-const M3C = '下のボタンから投稿ページを開いて、貼り付けてください。';
+const M3C = '下のボタンから投稿ページを開いて、貼り付けてください👇';
 
-const M4 = 'ありがとうございます、とても助かります！\nいただいた言葉が、これから式場を探す方の後押しになります。\n\nまたお会いできる日を、スタッフ一同楽しみにしています。';
+const M4 = 'ご協力ありがとうございました✨\nいただいた言葉が、これから式場を探されるおふたりの後押しになります。\n\n' + CLOSING;
 
-const M5 = 'いただいたご意見は、これからの会場づくりに活かしていきますね。\n\nまたお会いできる日を、スタッフ一同楽しみにしています。';
+const M5 = 'いただいたご意見は、これからのフェスタづくりに活かしてまいります。\n\n' + CLOSING;
 
 let runId = 0;
 
@@ -150,7 +152,7 @@ function dateLabel(text){
 function addBot(text, time, copy){
   const row = document.createElement('div');
   row.className = 'msg-row bot';
-  row.innerHTML = '<div class="avatar">STYLE<br>UN</div>'
+  row.innerHTML = '<div class="avatar">浜松<br>フェスタ</div>'
     + '<div class="bubble' + (copy ? ' copy' : '') + '">' + esc(text) + '</div>'
     + '<span class="time">' + time + '</span>';
   chat().appendChild(row);
@@ -208,7 +210,7 @@ function addQuick(options){
 async function typing(my){
   const t = document.createElement('div');
   t.className = 'typing';
-  t.innerHTML = '<div class="avatar">STYLE<br>UN</div><div class="typing-dots"><span></span><span></span><span></span></div>';
+  t.innerHTML = '<div class="avatar">浜松<br>フェスタ</div><div class="typing-dots"><span></span><span></span><span></span></div>';
   chat().appendChild(t);
   scroll();
   await sleep(900);
