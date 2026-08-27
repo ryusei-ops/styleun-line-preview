@@ -113,27 +113,21 @@ footer{margin-top:26px;font-size:11.5px;color:var(--ink-3);text-align:center}
 <script>
 const REVIEW_URL = 'https://g.page/r/CZq9Vv1ky7-UEAE/review';
 
-const TICKET_BODY = '【キャトルセゾン浜松】のレストランでご利用いただけるお食事チケットです！\nぜひおふたりの特別なひとときとしてご利用ください🍴\n\n（ここにチケット本体を添付 ※要確認）';
-
-const CLOSING = '気になる結婚式場のご見学予約や結婚式に関するご相談も、このLINEからお気軽にお問い合わせください💍\n\nおふたりらしい結婚式との出会いを、スタッフ一同応援しております。\n今後とも浜松ウェディングフェスタをよろしくお願いいたします😊';
+const TICKET_BODY = '【キャトルセゾン浜松】のレストランでご利用いただけるお食事チケットです！\nぜひおふたりの特別なひとときとしてご利用ください🍴\n\n（ここにチケット本体を添付 ※要確認）\n\n気になる結婚式場のご見学予約や結婚式に関するご相談も、このLINEからお気軽にお問い合わせください💍\n\nおふたりらしい結婚式との出会いを、スタッフ一同応援しております。\n今後とも浜松ウェディングフェスタをよろしくお願いいたします😊';
 
 const M1 = '{name}様\n\nアンケートへのご回答ありがとうございました✨\n当日のご感想、ありがたく読ませていただきますね。';
 
 const M2 = 'それと、もうひとつだけお願いさせてください🙏\n\nいま書いていただいたご感想、そのままGoogleの口コミにも載せていただけませんか？\n\n式場探しをされている方が一番参考にされるのは、実際に足を運ばれた方の言葉なんです。\nコピーして貼り付けるだけなので、1分ほどで終わります😊';
 
-const T_YES = 'ありがとうございます、とても助かります✨\n先に参加特典のレストランチケットをお送りしますね🎁\n\n' + TICKET_BODY;
-
-const T_NO = '承知しました！\nご回答いただいた皆さまへ、参加特典のレストランチケットをお送りいたします🎁\n\n' + TICKET_BODY;
-
-const M3A = 'それでは、口コミの手順です📝\n次のメッセージに、書いていただいたご感想をそのまま載せておきますね。\n\n1. 次のメッセージを長押しして「コピー」を選ぶ\n2. 下のボタンから投稿ページを開く\n3. 星の数を選んで、貼り付けたら投稿\n\n※Googleアカウントへのログインが必要です\n※文章はそのままでも、書き換えていただいても大丈夫です';
+const M3A = 'ありがとうございます、とても助かります✨\n\n次のメッセージに、書いていただいたご感想をそのまま載せておきますね。\n\n1. 次のメッセージを長押しして「コピー」を選ぶ\n2. 下のボタンから投稿ページを開く\n3. 星の数を選んで、貼り付けたら投稿\n\n※Googleアカウントへのログインが必要です\n※文章はそのままでも、書き換えていただいても大丈夫です';
 
 const M3B = 'スタッフの方が丁寧に案内してくださって、初めての式場見学でも不安なく回れました。チャペルの雰囲気が想像以上で、ここで挙げたいと素直に思えました。\n\n（アンケートのご感想がそのまま入ります）';
 
 const M3C = '下のボタンから投稿ページを開いて、貼り付けてください👇';
 
-const M4 = 'ご協力ありがとうございました✨\nいただいた言葉が、これから式場を探されるおふたりの後押しになります。\n\n' + CLOSING;
+const T_YES = 'あわせて、参加特典のレストランチケットをお送りいたします🎁\n\n' + TICKET_BODY;
 
-const M5 = 'いただいたご意見は、これからのフェスタづくりに活かしてまいります。\n\n' + CLOSING;
+const T_NO = '承知しました！\nご回答いただいた皆さまへ、参加特典のレストランチケットをお送りいたします🎁\n\n' + TICKET_BODY;
 
 let runId = 0;
 
@@ -225,7 +219,7 @@ async function startMain(){
   await sleep(400); if (my !== runId) return;
 
   addBot(M1, '18:42');
-  await sleep(1100); if (my !== runId) return;
+  await sleep(1000); if (my !== runId) return;
 
   addBot(M2, '18:42');
   await sleep(350); if (my !== runId) return;
@@ -242,9 +236,6 @@ async function choosePost(my){
   await sleep(500); if (my !== runId) return;
   if (!await typing(my)) return;
 
-  addBot(T_YES, '18:43');
-  await sleep(1100); if (my !== runId) return;
-
   addBot(M3A, '18:43');
   await sleep(900); if (my !== runId) return;
 
@@ -255,19 +246,10 @@ async function choosePost(my){
   addBot(M3C, '18:43');
   await sleep(300); if (my !== runId) return;
   addCta('投稿ページを開く', REVIEW_URL);
-  await sleep(300); if (my !== runId) return;
+  await sleep(1100); if (my !== runId) return;
 
-  addQuick([
-    { label: '投稿しました', action: () => reportDone(my) }
-  ]);
-}
-
-async function reportDone(my){
-  if (my !== runId) return;
-  addUser('投稿しました', '18:46');
-  await sleep(500); if (my !== runId) return;
-  if (!await typing(my)) return;
-  addBot(M4, '18:46');
+  addBot(T_YES, '18:43');
+  addHint('▲ 投稿を待たずに届きます。投稿の確認を条件にしないため。');
 }
 
 async function chooseSkip(my){
@@ -276,10 +258,8 @@ async function chooseSkip(my){
   await sleep(500); if (my !== runId) return;
   if (!await typing(my)) return;
   addBot(T_NO, '18:43');
-  await sleep(1100); if (my !== runId) return;
-  addBot(M5, '18:43');
   await sleep(300); if (my !== runId) return;
-  addHint('ここで終了します。理由をうかがったり、後日あらためてお願いしたりはしません。');
+  addHint('▲ 見送っても同じチケットが届きます。理由も聞かず、再依頼もしません。');
 }
 
 function resetChat(){
@@ -287,6 +267,7 @@ function resetChat(){
 }
 
 startMain();
+
 </script>
 
 </body>
